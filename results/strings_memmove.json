@@ -1,0 +1,538 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-11-10T19:55:39.312999+00:00",
+  "target": "sm83 / LR35902",
+  "methodology": {
+    "metric": "assembled function-body bytes, including prologue/epilogue; external helper bodies excluded",
+    "rust_measurement": "RGBDS section-relative EQU differences",
+    "c_measurement": "SDCC relocatable object _CODE symbol offsets",
+    "abi": "native compiler calling conventions; extern C does not make the two ABIs identical",
+    "integer_division": "Rust unchecked intrinsics match the C valid-input domain; no Rust panic guards",
+    "signed_c_arithmetic": "unsigned intermediates and casts; two-complement conversion and arithmetic right shift required",
+    "float_widths": "C sizeof assertions prevent double/long double silently becoming f32",
+    "instruction_counts": "source mnemonics only; inline db machine code reported separately",
+    "scope": "static codegen comparison; no cycle estimates or target runtime equivalence checks",
+    "library_cost": "SDCC archive dependency bytes for all supported cases; isolated linked reachable ROM sections for Rust string cases; no startup, entry harness or alignment padding"
+  },
+  "tools": {
+    "sdcc": {
+      "command": [
+        "sdcc",
+        "--version"
+      ],
+      "version": "SDCC : mcs51/z80/z180/r2k/r2ka/r3ka/r4k/r5k/r6k/sm83/tlcs90/ez80/z80n/r800/ds390/pic16/pic14/TININative/ds400/hc08/s08/stm8/pdk13/pdk14/pdk15/mos6502/mos65c02/f8/f8l 4.6.0 #16555 (Linux)\npublished under GNU General Public License (GPL)\n"
+    },
+    "sangoku": {
+      "command": [
+        "/home/takashi/Projects/sangoku/target/release/sangoku",
+        "--help"
+      ],
+      "version": "Compile and run Game Boy programs\n\nUsage: sangoku <COMMAND>\n\nCommands:\n  example   \n  build     \n  run       \n  frontend  \n  clif      \n  asm       \n  lower     \n  help      Print this message or the help of the given subcommand(s)\n\nOptions:\n  -h, --help  Print help\n",
+      "binary_sha256": "a23b43dac6447f09d174c837badc4813c952f12e00ae98940418909073e1281f",
+      "checkout_commit": "ae1d2b6568b4c59e2b8512714b642831549b845f",
+      "checkout_status": " M .beads/issues.jsonl\n",
+      "backend_sha256": "3ac1764e231d7263f8eccc02f0cbe8c7b1c09110b8d300d55aba3520c199284b"
+    },
+    "rgbasm": {
+      "command": [
+        "rgbasm",
+        "--version"
+      ],
+      "version": "rgbasm v1.0.4-68-g6054102f\n"
+    },
+    "rustc": {
+      "command": [
+        "rustc",
+        "+gbc-lr35902",
+        "-Vv"
+      ],
+      "version": "rustc 1.101.0-dev (lr35902)\nbinary: rustc\ncommit-hash: unknown\ncommit-date: unknown\nhost: x86_64-unknown-linux-gnu\nrelease: 1.101.0-dev\nLLVM version: 23.1.4\n"
+    }
+  },
+  "sources": {
+    "cases/strings.c": "2737e57e9864795afa02be158ee3d8e9c2dd531ede48a5f135471ee7adbde374",
+    "cases/strings.rs": "372083a0c6bcadcc24d803553339e911e0e7d09a5d68f3ee59d4fa545d295db7"
+  },
+  "runs": {
+    "size": {
+      "summary": {
+        "cases": 1,
+        "statuses": {
+          "compared": 1
+        },
+        "smaller_function_counts": {
+          "sdcc": 1
+        },
+        "dependency_comparisons": 1,
+        "dependency_smaller_counts": {
+          "sangoku": 1
+        },
+        "compiler_statuses": {
+          "sangoku": {
+            "ok": 1
+          },
+          "sdcc": {
+            "ok": 1
+          }
+        },
+        "largest_byte_gaps": [
+          {
+            "id": "strings_memmove",
+            "status": "compared",
+            "bytes_delta": 27,
+            "bytes_ratio": 2.125,
+            "stack_reference_delta": 8,
+            "helper_dependent": true,
+            "smaller": "sdcc",
+            "with_dependencies": {
+              "sangoku_bytes": 107,
+              "sdcc_bytes": 245,
+              "bytes_delta": -138,
+              "bytes_ratio": 0.43673469387755104,
+              "smaller": "sangoku"
+            },
+            "sangoku_bytes": 51,
+            "sdcc_bytes": 24
+          }
+        ]
+      },
+      "patterns": [
+        {
+          "family": "string",
+          "operation": "memmove",
+          "widths": [
+            {
+              "type": "strings",
+              "width": 8,
+              "comparison": "compared",
+              "sangoku": {
+                "status": "ok",
+                "function_bytes": 51,
+                "stack_reference_count": 14,
+                "external_transfers": [
+                  {
+                    "kind": "call",
+                    "target": "memmove"
+                  }
+                ]
+              },
+              "sdcc": {
+                "status": "ok",
+                "function_bytes": 24,
+                "stack_reference_count": 6,
+                "external_transfers": [
+                  {
+                    "kind": "call",
+                    "target": "_memmove"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "id": "strings_memmove",
+          "type": "strings",
+          "width": 8,
+          "kind": "string",
+          "signed": null,
+          "operation": "memmove",
+          "domain": "valid pointers and readable/writable ranges within single allocations; lengths and string lengths <= 32766; no address wrapping; copy ranges do not overlap unless memmove; NUL-terminated strings for unbounded scans",
+          "c_source": "cases/strings.c",
+          "rust_source": "cases/strings.rs",
+          "c_function": "uint8_t * strings_memmove(uint8_t *dst, const uint8_t *src, uint16_t n) { return (uint8_t *)memmove(dst, src, n); }",
+          "rust_function": "#[unsafe(no_mangle)]\n#[inline(never)]\npub unsafe extern \"C\" fn strings_memmove(dst: *mut u8, src: *const u8, n: u16) -> *mut u8 { unsafe { core::ptr::copy(src, dst, n as usize); dst } }",
+          "scenario": "memmove",
+          "parameters": [
+            "dst",
+            "src",
+            "n"
+          ],
+          "result": "pointer",
+          "style": "library",
+          "semantic_note": "copy includes original destination pointer return; overlap allowed only for memmove",
+          "link_entry": "#[unsafe(no_mangle)]\npub fn gbc_main() -> u8 { unsafe { strings_memmove(0xc100 as *mut u8, 0xc200 as *const u8, core::ptr::read_volatile(0xc000 as *const u16)) as usize as u8 } }",
+          "sangoku": {
+            "status": "ok",
+            "assembly_path": "build/run-20261110T195539291014/size/strings/sangoku/output.asm",
+            "function_bytes": 51,
+            "assembly": "EXPORT __rust_strings_memmove\n__rust_strings_memmove::\n  add sp, -7\n.block0:\n  ld hl, sp + 3\n  ld [hl], b\n  ld hl, sp + 5\n  ld [hl], c\n  ld hl, sp + 9\n  ld h, [hl]\n  push hl\n  ld hl, sp + 12\n  ld c, [hl]\n  pop hl\n  push hl\n  ld hl, sp + 13\n  ld b, [hl]\n  pop hl\n.block1:\n  push af\n  ld a, h\n  ld hl, sp + 2\n  ld [hl], a\n  pop af\n  ld hl, sp + 1\n  ld [hl], c\n  ld hl, sp + 2\n  ld [hl], b\n  ld hl, sp + 3\n  ld b, [hl]\n  ld hl, sp + 5\n  ld c, [hl]\n  call memmove\n.block2:\n  ld hl, sp + 5\n  ld b, [hl]\n  ld hl, sp + 3\n  ld a, [hl]\n  add sp, 7\n  ret\n\n",
+            "source_instruction_count": 35,
+            "inline_machine_code_bytes": 0,
+            "mnemonics": {
+              "add": 2,
+              "call": 1,
+              "ld": 25,
+              "pop": 3,
+              "push": 3,
+              "ret": 1
+            },
+            "stack_reference_count": 14,
+            "push_count": 3,
+            "pop_count": 3,
+            "identity_move_count": 0,
+            "external_transfers": [
+              {
+                "kind": "call",
+                "target": "memmove"
+              }
+            ],
+            "library": {
+              "status": "ok",
+              "measurement": "isolated sangoku build: reachable ROM sections in probe.map; entry, cartridge header and startup excluded; section alignment excluded",
+              "root_function_bytes": 51,
+              "dependency_bytes": 56,
+              "total_bytes": 107,
+              "sections": [
+                {
+                  "name": "memmove",
+                  "bytes": 56,
+                  "assembly": "\nmemmove::\n    push bc\n    ld d, c\n    ld e, b\n    ld c, a\n    ld hl, sp + 4\n    ld b, [hl]\n    ld hl, sp + 5\n    ld a, [hli]\n    ld h, [hl]\n    ld l, a\n    push bc\n    push hl\n    pop bc\n    pop hl\n    ld a, e\n    sub l\n    ld a, d\n    sbc h\n    jr c, .forward\n    add hl, bc\n    ld a, e\n    add c\n    ld e, a\n    ld a, d\n    adc b\n    ld d, a\n.backward:\n    ld a, b\n    or c\n    jr z, .done\n    dec hl\n    dec de\n    ld a, [hl]\n    ld [de], a\n    dec bc\n    jr .backward\n.forward:\n    ld a, b\n    or c\n    jr z, .done\n.copy:\n    ld a, [hli]\n    ld [de], a\n    inc de\n    dec bc\n    ld a, b\n    or c\n    jr nz, .copy\n.done:\n    pop bc\n    ld a, b\n    ld b, c\n    ret\n"
+                }
+              ],
+              "map_path": "/home/takashi/Projects/sangoku-tests/build/artifacts/linked_case-28269-1794340539542539509/probe.map",
+              "assembly_path": "/home/takashi/Projects/sangoku-tests/build/artifacts/linked_case-28269-1794340539542539509/probe.asm"
+            }
+          },
+          "sdcc": {
+            "status": "ok",
+            "assembly_path": "build/run-20261110T195539291014/size/strings/sdcc/output.asm",
+            "function_bytes": 24,
+            "assembly": "\tdec\tsp\n\tdec\tsp\n\tldhl\tsp,\t#4\n\tld\ta, (hl)\n\tldhl\tsp,\t#0\n\tld\t(hl), a\n\tldhl\tsp,\t#5\n\tld\ta, (hl)\n\tldhl\tsp,\t#1\n\tld\t(hl), a\n\tpop\thl\n\tpush\thl\n\tpush\thl\n\tcall\t_memmove\n\tpop\thl\n\tpop\thl\n\tpop\taf\n\tjp\t(hl)\n",
+            "source_instruction_count": 18,
+            "inline_machine_code_bytes": 0,
+            "mnemonics": {
+              "call": 1,
+              "dec": 2,
+              "jp": 1,
+              "ld": 4,
+              "ldhl": 4,
+              "pop": 4,
+              "push": 2
+            },
+            "stack_reference_count": 6,
+            "push_count": 2,
+            "pop_count": 4,
+            "identity_move_count": 0,
+            "external_transfers": [
+              {
+                "kind": "call",
+                "target": "_memmove"
+              }
+            ],
+            "library": {
+              "status": "ok",
+              "measurement": "isolated SDCC link map ROM areas; no CRT, entry harness or section alignment; verified against transitive archive member sizes",
+              "archive": "/usr/share/sdcc/lib/sm83/sm83.lib",
+              "archive_sha256": "feeaf9834a599a2759af56c6b677213393ceb1ab9d1064ce2556dd9ee9dd713b",
+              "dependency_bytes": 221,
+              "modules": [
+                {
+                  "code_bytes": 171,
+                  "areas": {
+                    "_CODE": 171,
+                    "_DATA": 0,
+                    "_INITIALIZED": 0,
+                    "_DABS": 0,
+                    "_HOME": 0,
+                    "_GSINIT": 0,
+                    "_GSFINAL": 0,
+                    "_INITIALIZER": 0,
+                    "_CABS": 0
+                  },
+                  "definitions": [
+                    "_memmove"
+                  ],
+                  "references": [
+                    "___memcpy"
+                  ],
+                  "member": "_memmove.rel",
+                  "object_path": "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/sdcc-library/_memmove.rel",
+                  "object_sha256": "6634bbb291a4d5262a330bf1f13ee1b4ce795857e5a5d510c42521af4bccc886",
+                  "linked_address": 536,
+                  "assembly": "0218: e8f8   add sp, -8\n021a: f802   ld hl, sp +2\n021c: 7b     ld a, e\n021d: 22     ld [hli], a\n021e: 72     ld [hl], d\n021f: f80a   ld hl, sp +10\n0221: 2a     ld a, [hli]\n0222: 5f     ld e, a\n0223: 56     ld d, [hl]\n0224: 7a     ld a, d\n0225: b3     or e\n0226: 280b   jr z, $0233\n0228: f802   ld hl, sp +2\n022a: 7e     ld a, [hl]\n022b: 91     sub c\n022c: 200d   jr nz, $023b\n022e: 23     inc hl\n022f: 7e     ld a, [hl]\n0230: 90     sub b\n0231: 2008   jr nz, $023b\n0233: f802   ld hl, sp +2\n0235: 2a     ld a, [hli]\n0236: 4f     ld c, a\n0237: 46     ld b, [hl]\n0238: c3be02 jp $02be\n023b: f802   ld hl, sp +2\n023d: 7e     ld a, [hl]\n023e: f806   ld hl, sp +6\n0240: 77     ld [hl], a\n0241: f803   ld hl, sp +3\n0243: 7e     ld a, [hl]\n0244: f807   ld hl, sp +7\n0246: 77     ld [hl], a\n0247: e1     pop hl\n0248: c5     push bc\n0249: f806   ld hl, sp +6\n024b: 3a     ld a, [hld]\n024c: 2b     dec hl\n024d: 77     ld [hl], a\n024e: f807   ld hl, sp +7\n0250: 3a     ld a, [hld]\n0251: 2b     dec hl\n0252: 22     ld [hli], a\n0253: 79     ld a, c\n0254: 96     sub [hl]\n0255: 23     inc hl\n0256: 78     ld a, b\n0257: 9e     sbc a, [hl]\n0258: 304f   jr nc, $02a9\n025a: 79     ld a, c\n025b: 83     add a, e\n025c: 4f     ld c, a\n025d: 78     ld a, b\n025e: 8a     adc a, d\n025f: 47     ld b, a\n0260: f806   ld hl, sp +6\n0262: 79     ld a, c\n0263: 96     sub [hl]\n0264: 23     inc hl\n0265: 78     ld a, b\n0266: 9e     sbc a, [hl]\n0267: 3010   jr nc, $0279\n0269: d5     push de\n026a: f802   ld hl, sp +2\n026c: 2a     ld a, [hli]\n026d: 4f     ld c, a\n026e: 46     ld b, [hl]\n026f: f806   ld hl, sp +6\n0271: 2a     ld a, [hli]\n0272: 5f     ld e, a\n0273: 56     ld d, [hl]\n0274: cdc302 call $02c3\n0277: 1845   jr $02be\n0279: f806   ld hl, sp +6\n027b: 3a     ld a, [hld]\n027c: 2b     dec hl\n027d: 83     add a, e\n027e: 22     ld [hli], a\n027f: 23     inc hl\n0280: 23     inc hl\n0281: 3a     ld a, [hld]\n0282: 2b     dec hl\n0283: 8a     adc a, d\n0284: 22     ld [hli], a\n0285: 7b     ld a, e\n0286: 22     ld [hli], a\n0287: 72     ld [hl], d\n0288: f804   ld hl, sp +4\n028a: 2a     ld a, [hli]\n028b: 5f     ld e, a\n028c: 3a     ld a, [hld]\n028d: 57     ld d, a\n028e: 1b     dec de\n028f: 7b     ld a, e\n0290: 22     ld [hli], a\n0291: 7a     ld a, d\n0292: 32     ld [hld], a\n0293: 0b     dec bc\n0294: 0a     ld a, [bc]\n0295: 5e     ld e, [hl]\n0296: 23     inc hl\n0297: 66     ld h, [hl]\n0298: 6b     ld l, e\n0299: 77     ld [hl], a\n029a: f806   ld hl, sp +6\n029c: 2a     ld a, [hli]\n029d: 5f     ld e, a\n029e: 3a     ld a, [hld]\n029f: 57     ld d, a\n02a0: 1b     dec de\n02a1: 7b     ld a, e\n02a2: 22     ld [hli], a\n02a3: 72     ld [hl], d\n02a4: b2     or d\n02a5: 20e1   jr nz, $0288\n02a7: 1810   jr $02b9\n02a9: d5     push de\n02aa: f802   ld hl, sp +2\n02ac: 2a     ld a, [hli]\n02ad: 4f     ld c, a\n02ae: 46     ld b, [hl]\n02af: f806   ld hl, sp +6\n02b1: 2a     ld a, [hli]\n02b2: 5f     ld e, a\n02b3: 56     ld d, [hl]\n02b4: cdc302 call $02c3\n02b7: 1805   jr $02be\n02b9: f802   ld hl, sp +2\n02bb: 2a     ld a, [hli]\n02bc: 4f     ld c, a\n02bd: 46     ld b, [hl]\n02be: e808   add sp, 8\n02c0: e1     pop hl\n02c1: f1     pop af\n02c2: e9     jp hl",
+                  "disassembly_note": "linear decode of actual linked _CODE bytes; embedded data is not distinguished; no cycle estimates"
+                },
+                {
+                  "code_bytes": 50,
+                  "areas": {
+                    "_CODE": 50
+                  },
+                  "definitions": [
+                    "___memcpy",
+                    "_memcpy"
+                  ],
+                  "references": [],
+                  "member": "memcpy.rel",
+                  "object_path": "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/sdcc-library/memcpy.rel",
+                  "object_sha256": "1460925a736461f280d188a1ec1c7978d42bd5eadba1e60263000066817a28f1",
+                  "linked_address": 707,
+                  "assembly": "02c3: d5     push de\n02c4: f805   ld hl, sp +5\n02c6: 3a     ld a, [hld]\n02c7: 6e     ld l, [hl]\n02c8: 60     ld h, b\n02c9: 47     ld b, a\n02ca: 7d     ld a, l\n02cb: 69     ld l, c\n02cc: cb38   srl b\n02ce: 1f     rra\n02cf: 4f     ld c, a\n02d0: 3003   jr nc, $02d5\n02d2: 2a     ld a, [hli]\n02d3: 12     ld [de], a\n02d4: 13     inc de\n02d5: cb38   srl b\n02d7: cb19   rr c\n02d9: 04     inc b\n02da: 0c     inc c\n02db: 300e   jr nc, $02eb\n02dd: 1806   jr $02e5\n02df: 2a     ld a, [hli]\n02e0: 12     ld [de], a\n02e1: 13     inc de\n02e2: 2a     ld a, [hli]\n02e3: 12     ld [de], a\n02e4: 13     inc de\n02e5: 2a     ld a, [hli]\n02e6: 12     ld [de], a\n02e7: 13     inc de\n02e8: 2a     ld a, [hli]\n02e9: 12     ld [de], a\n02ea: 13     inc de\n02eb: 0d     dec c\n02ec: 20f1   jr nz, $02df\n02ee: 05     dec b\n02ef: 20ee   jr nz, $02df\n02f1: c1     pop bc\n02f2: e1     pop hl\n02f3: f1     pop af\n02f4: e9     jp hl",
+                  "disassembly_note": "linear decode of actual linked _CODE bytes; embedded data is not distinguished; no cycle estimates"
+                }
+              ],
+              "unresolved_symbols": [],
+              "total_bytes": 245,
+              "root_function_bytes": 24,
+              "map_path": "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sdcc-linked/strings_memmove/case.map",
+              "archive_estimate_verified": true
+            }
+          },
+          "comparison": {
+            "status": "compared",
+            "bytes_delta": 27,
+            "bytes_ratio": 2.125,
+            "stack_reference_delta": 8,
+            "helper_dependent": true,
+            "smaller": "sdcc",
+            "with_dependencies": {
+              "sangoku_bytes": 107,
+              "sdcc_bytes": 245,
+              "bytes_delta": -138,
+              "bytes_ratio": 0.43673469387755104,
+              "smaller": "sangoku"
+            }
+          },
+          "analysis": {
+            "summary": "Sangoku function body is 27 bytes larger than SDCC.",
+            "metric": "static function-body bytes; reachable dependency size reported separately when available",
+            "notes": [
+              {
+                "category": "body_size",
+                "confidence": "observed",
+                "observation": "Sangoku function body is 27 bytes larger than SDCC.",
+                "evidence": {
+                  "sangoku": 51,
+                  "sdcc": 24
+                }
+              },
+              {
+                "category": "stack_addressing",
+                "confidence": "inference",
+                "observation": "Sangoku has 8 more source instructions referencing SP.",
+                "evidence": {
+                  "sangoku": {
+                    "stack_reference_count": 14,
+                    "push_count": 3,
+                    "pop_count": 3
+                  },
+                  "sdcc": {
+                    "stack_reference_count": 6,
+                    "push_count": 2,
+                    "pop_count": 4
+                  }
+                },
+                "investigate": "Inspect value lifetimes, stack slot reuse and argument/result marshaling. SP references include arguments and locals, so they are not a pure spill count."
+              },
+              {
+                "category": "pair_arithmetic",
+                "confidence": "inference",
+                "observation": "The source uses different amounts of native register-pair arithmetic.",
+                "evidence": {
+                  "sangoku": {
+                    "count": 0,
+                    "examples": []
+                  },
+                  "sdcc": {
+                    "count": 2,
+                    "examples": [
+                      "dec sp",
+                      "dec sp"
+                    ]
+                  }
+                },
+                "investigate": "Compare native 16-bit address arithmetic with split-byte add/carry sequences. Account for differing algorithms and calling conventions before attributing the size gap."
+              },
+              {
+                "category": "control_flow",
+                "confidence": "inference",
+                "observation": "The emitted source has different branch structure.",
+                "evidence": {
+                  "sangoku": 0,
+                  "sdcc": 1
+                },
+                "investigate": "Inspect compare/boolean lowering and fallthrough layout; branch counts alone do not determine cycles."
+              },
+              {
+                "category": "helper_calls",
+                "confidence": "observed",
+                "observation": "Part of the implementation is outside the measured function body.",
+                "evidence": {
+                  "sangoku": [
+                    "memmove"
+                  ],
+                  "sdcc": [
+                    "_memmove"
+                  ]
+                },
+                "investigate": "Compare reachable helper bodies and calling conventions before judging total code size or speed."
+              },
+              {
+                "category": "helper_strategy",
+                "confidence": "inference",
+                "observation": "The wrappers use different helper calls or tail transfers.",
+                "evidence": {
+                  "sangoku": {
+                    "calls": 1,
+                    "tail_jumps": 0,
+                    "targets": [
+                      "memmove"
+                    ]
+                  },
+                  "sdcc": {
+                    "calls": 1,
+                    "tail_jumps": 0,
+                    "targets": [
+                      "_memmove"
+                    ]
+                  }
+                },
+                "investigate": "A tail transfer can avoid a call/return pair and argument cleanup in the wrapper. An inline loop versus a helper trades shared code size against call overhead; measure runtime before choosing."
+              },
+              {
+                "category": "dependency_size",
+                "confidence": "observed",
+                "observation": "Including reachable helpers reverses the function-body ranking.",
+                "evidence": {
+                  "total_bytes": {
+                    "sangoku": 107,
+                    "sdcc": 245
+                  },
+                  "dependency_bytes": {
+                    "sangoku": 56,
+                    "sdcc": 221
+                  }
+                },
+                "investigate": "This is cold, isolated ROM cost. Shared helpers are charged once per case; an application can amortize them across calls. SDCC cost is at archive-member granularity."
+              },
+              {
+                "category": "source_semantics",
+                "confidence": "observed",
+                "observation": "copy includes original destination pointer return; overlap allowed only for memmove",
+                "evidence": {
+                  "style": "library"
+                }
+              }
+            ],
+            "timing": "not measured"
+          }
+        }
+      ]
+    }
+  },
+  "commands": [
+    {
+      "compiler": "sangoku",
+      "mode": "size",
+      "type": "strings",
+      "command": [
+        "/home/takashi/Projects/sangoku/target/release/sangoku",
+        "asm",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sangoku/selected.rs",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sangoku/output.asm",
+        "--opt-level",
+        "z"
+      ],
+      "returncode": 0,
+      "stdout": "Wrote /home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sangoku/output.asm\n",
+      "stderr": "info: `cargo` is unavailable for the active toolchain\ninfo: falling back to \"/home/takashi/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo\"\n    Finished `release` profile [optimized] target(s) in 0.02s\nBuild artifacts: /home/takashi/Projects/sangoku-tests/build/artifacts/selected-28229-1794340539440834310\n"
+    },
+    {
+      "compiler": "sdcc",
+      "mode": "size",
+      "type": "strings",
+      "command": [
+        "sdcc",
+        "-msm83",
+        "--std-c11",
+        "--Werror",
+        "-S",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sdcc/capability.c",
+        "-o",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sdcc/capability.asm"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "compiler": "sdcc",
+      "mode": "size",
+      "type": "strings",
+      "command": [
+        "sdcc",
+        "-msm83",
+        "--std-c11",
+        "--Werror",
+        "--opt-code-size",
+        "-c",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sdcc/selected.c",
+        "-o",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sdcc/output.rel"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "compiler": "sdcc",
+      "phase": "link",
+      "mode": "size",
+      "case": "strings_memmove",
+      "command": [
+        "sdcc",
+        "-msm83",
+        "--std-c11",
+        "--Werror",
+        "--opt-code-size",
+        "-c",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sdcc-linked/strings_memmove/linked_case.c",
+        "-o",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sdcc-linked/strings_memmove/case.rel"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "compiler": "sdcc",
+      "phase": "link",
+      "mode": "size",
+      "case": "strings_memmove",
+      "command": [
+        "sdcc",
+        "-msm83",
+        "--no-std-crt0",
+        "--code-loc",
+        "0x0200",
+        "--data-loc",
+        "0xc000",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sdcc-linked/strings_memmove/case.rel",
+        "-o",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/sdcc-linked/strings_memmove/case.ihx"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "compiler": "sangoku",
+      "phase": "link",
+      "mode": "size",
+      "case": "strings_memmove",
+      "command": [
+        "/home/takashi/Projects/sangoku/target/release/sangoku",
+        "build",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/linked/strings_memmove/linked_case.rs",
+        "/home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/linked/strings_memmove/case.gb",
+        "--opt-level",
+        "z"
+      ],
+      "returncode": 0,
+      "stdout": "Wrote /home/takashi/Projects/sangoku-tests/build/run-20261110T195539291014/size/strings/linked/strings_memmove/case.gb\n",
+      "stderr": "info: `cargo` is unavailable for the active toolchain\ninfo: falling back to \"/home/takashi/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo\"\n    Finished `release` profile [optimized] target(s) in 0.02s\nBuild artifacts: /home/takashi/Projects/sangoku-tests/build/artifacts/linked_case-28269-1794340539542539509\nwarning: due to multiple output types requested, the explicitly specified output file name will be adapted for each output type\n\nwarning: 1 warning emitted\n\n"
+    }
+  ]
+}

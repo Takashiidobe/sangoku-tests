@@ -1,0 +1,447 @@
+{
+  "status": "passed",
+  "reference": "Clang-compiled C and host libc",
+  "scope": "host source equivalence; entire buffers and relative return pointers checked; not SM83 execution",
+  "source_sha256": {
+    "cases/strings.c": "321c5878980f83463ae92d7942b3dbcf75f86315346232617c5ae349f04d0557",
+    "cases/strings.rs": "eab6481044c9d3c44b97a962394594eb7e3e6662d263e4915b9e7548d8152b74"
+  },
+  "tools": {
+    "clang": "clang version 23.1.4\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin\n",
+    "rustc": "rustc 1.101.0-nightly (12433c307 2026-10-24)\nbinary: rustc\ncommit-hash: 12433c307b5a497388ffe2f4e49dbf1ab8c71fa0\ncommit-date: 2026-10-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.101.0-nightly\nLLVM version: 23.1.4\n"
+  },
+  "cases": [
+    {
+      "id": "strings_strlen",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_strlen_loop",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_strcmp",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_strcmp_loop",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_strncmp",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_strchr",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_strrchr",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_strcpy",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_strncpy",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy0",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy1",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy2",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy3",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy4",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy7",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy8",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy15",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy16",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy17",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy31",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy32",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy63",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy64",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy127",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy128",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove0",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove1",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove2",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove3",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove4",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove7",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove8",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove15",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove16",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove17",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove31",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove32",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove63",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove64",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove127",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memmove128",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset0",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset1",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset2",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset3",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset4",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset7",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset8",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset15",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset16",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset17",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset31",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset32",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset63",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset64",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset127",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memset128",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp0",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp1",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp2",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp3",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp4",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp7",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp8",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp15",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp16",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp17",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp31",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp32",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp63",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp64",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp127",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcmp128",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memeq",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memchr",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy_offset1",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy_offset3",
+      "vectors": 192,
+      "status": "passed"
+    },
+    {
+      "id": "strings_memcpy_offset7",
+      "vectors": 192,
+      "status": "passed"
+    }
+  ],
+  "vectors_per_language": 15744,
+  "commands": [
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/strings.c",
+      "-o",
+      "/tmp/sangoku-string-check-qc7m04l7/c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-string-check-qc7m04l7/strings.rs",
+      "-o",
+      "/tmp/sangoku-string-check-qc7m04l7/rust.so"
+    ]
+  ]
+}

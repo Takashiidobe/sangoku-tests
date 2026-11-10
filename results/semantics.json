@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "source_sha256": {
+    "cases/i128.c": "1c615e61d46455770b3db8596075e62c7de94256fe420c69f6ff95bc8414e2d4",
+    "cases/i128.rs": "719c516cb3876bc8fcad07abb68c1c116ebb1dfd4ea9dde94faaf637b1562193",
+    "cases/i16.c": "4fe5ea9deaf3e232f3eccf0b6ab64c7ad35bae105fe49662ebb322ded02c9823",
+    "cases/i16.rs": "cfd9f19cf7c1223c21968abe72c4d112db7698bb89371d40290853ebd8ddcaa6",
+    "cases/i32.c": "217738af7405a5637d7e3ec4a77588db4d923f020b97ea451436da90d3d8478a",
+    "cases/i32.rs": "9eafb673bf4aaf8ac4190694708f6e692e35bdf9d005ad5919d33eeb5f696903",
+    "cases/i64.c": "b2ce076fcc7fa27e69efb64e6fcd7286f6944ff7bfc25fb1112234f15e929433",
+    "cases/i64.rs": "eb3386b3d3c9ed8070634e8105508ed199596c2dd22be279be0b872d4f9bece0",
+    "cases/i8.c": "44b817438b4e584929442bf6f4c0a28344557a6d977ee4c5f0327957ad6cc5c4",
+    "cases/i8.rs": "17d549fb11dd45278ecaf14bd1fd29f2e85cd062460b52e79f66d9d9a4c18472",
+    "cases/u128.c": "37ef225b688ee3493ee38242563e1a493a7eb23e1ca4c8b1c850661ffa0e63ac",
+    "cases/u128.rs": "c4905797d6617a40038090dd07d28e0ab3873cac851aa2cf5823e81fbb2602fc",
+    "cases/u16.c": "dd7309a4a2ba39d415f14e28ae8a5d5536b29999c5857746406934aef1e751a7",
+    "cases/u16.rs": "cd2f97d8e64d5abbad2b56ae73f5e1ce94d0c205cd442c2a0c9ace11a91c8187",
+    "cases/u32.c": "2658653784e8cbdffaea61b62a4a0a699e55f49b449882e66ddf3d7fb9407817",
+    "cases/u32.rs": "29d2564bcd413b582fd27c6c67d06af2ee7a35e1dbd009e37698facab395d14f",
+    "cases/u64.c": "e0a048181a20ebb4aaf761ba68e0d706c91cff2ba9f38843aab35b462a27b679",
+    "cases/u64.rs": "6c455899c579324d6daac316a07ae74f3bb624e38ee0fcebe2d7a68492d5e228",
+    "cases/u8.c": "f5ba181fdb7da0444a78971e4a9a5a18a432e701395bd07a10062d91011df017",
+    "cases/u8.rs": "3e43d747527f5436f9bdf5bc755a2d7f9a00a02a55ad7d8b303b9ba4b9e6def8"
+  },
+  "tools": {
+    "c": "clang version 23.1.4\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin\n",
+    "rust": "rustc 1.101.0-nightly (12433c307 2026-10-24)\nbinary: rustc\ncommit-hash: 12433c307b5a497388ffe2f4e49dbf1ab8c71fa0\ncommit-date: 2026-10-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.101.0-nightly\nLLVM version: 23.1.4\n"
+  },
+  "integer_cases": 344,
+  "vectors_per_language": 41118,
+  "reference": "compiled host C program",
+  "reference_compiler": "clang",
+  "c_undefined_behavior_sanitizer": true,
+  "scope": "host C/Rust source equivalence; does not execute SM83 code or validate floating-point runtime helpers",
+  "commands": [
+    [
+      "clang",
+      "-std=c11",
+      "-O1",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "/tmp/sangoku-semantics-ezm8_biv/check.c",
+      "-o",
+      "/tmp/sangoku-semantics-ezm8_biv/c"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "-Copt-level=1",
+      "-Awarnings",
+      "/tmp/sangoku-semantics-ezm8_biv/check.rs",
+      "-o",
+      "/tmp/sangoku-semantics-ezm8_biv/rust"
+    ]
+  ]
+}

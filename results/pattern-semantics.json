@@ -1,0 +1,997 @@
+{
+  "status": "passed",
+  "reference": "Clang and host libc",
+  "tools": {
+    "clang": "clang version 23.1.4\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin\n",
+    "rustc": "rustc 1.101.0-nightly (12433c307 2026-10-24)\nbinary: rustc\ncommit-hash: 12433c307b5a497388ffe2f4e49dbf1ab8c71fa0\ncommit-date: 2026-10-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.101.0-nightly\nLLVM version: 23.1.4\n"
+  },
+  "scope": "host source equivalence of scalar/aggregate results, end offsets and complete buffers; not SM83 execution",
+  "cases": [
+    {
+      "id": "format_u16_decimal_divmod",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u16_decimal_derived",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u16_hex",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u16_decimal_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u32_decimal_divmod",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u32_decimal_derived",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u32_hex",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u32_decimal_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u64_decimal_divmod",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u64_decimal_derived",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "format_u64_hex",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "parse_decimal_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "parse_strtoul_decimal",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "parse_decimal_checked",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "parse_hex_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "parse_atoi",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_isdigit_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_isdigit_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_isalpha_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_isalpha_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_isspace_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_isspace_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_tolower_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_tolower_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_toupper_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "ctype_toupper_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "spans_strspn_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "spans_strspn_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "spans_strcspn_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "spans_strcspn_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "spans_strpbrk_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "spans_strpbrk_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "spans_tokenize_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "spans_strtok_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "substring_strstr_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "substring_strstr_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "substring_needle2",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "substring_needle4",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "concat_strcat_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "concat_strcat_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "concat_strncat_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "concat_strncat_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "concat_append_bounded",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_copy3_assign",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_return3_value",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_out3_call",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_copy5_assign",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_return5_value",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_out5_call",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_copy8_assign",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_return8_value",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_out8_call",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_copy12_assign",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_return12_value",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_out12_call",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "aggregate_pair_return",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "slices_sum_index",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "slices_sum_iter",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "slices_sum_raw",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "slices_sum_pointer",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "slices_sum_countdown",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "slices_copy_from_slice",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "slices_copy_within",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "slices_fill",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "slices_chunks_exact",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "search_binary_loop",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "search_bsearch_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "search_insertion_sort",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "search_qsort_library",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_load_le16",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_store_le16",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_load_be16",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_store_be16",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_load_le32",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_store_le32",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_load_be32",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_store_be32",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_load_le64",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_store_le64",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_load_be64",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "packing_store_be64",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "checksum_sum8",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "checksum_sum16",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "checksum_crc16",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "dispatch_dense",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "dispatch_sparse",
+      "vectors": 256,
+      "status": "passed"
+    },
+    {
+      "id": "dispatch_parser_state",
+      "vectors": 256,
+      "status": "passed"
+    }
+  ],
+  "vectors_per_language": 22272,
+  "source_sha256": {
+    "cases/aggregate_copy12.c": "2d62b43e66cd0149a885019b7d895a115fb1fc306e185da71889ff61142226cb",
+    "cases/aggregate_copy12.rs": "52e3716a29f4e5c69eaf1f3872651546903fb677915c6ac620d6c3343a497cfc",
+    "cases/aggregate_copy3.c": "61273fc0b4c9df8c8916346375bd0df6aabe1a38a8ac0d80a3ad52e60a2e2b18",
+    "cases/aggregate_copy3.rs": "6864c498d52c27f19ba5d3a823d867a4dadc2611140638b3c2a9bc026457ec65",
+    "cases/aggregate_copy5.c": "848bdfc126a4fc0dc401a95e739ba9a7405abd816182396dc4d6967010990b5b",
+    "cases/aggregate_copy5.rs": "15b1ae72d8ca10934be549cfcd1f16e426d3c09c339fa4821890b260d48c376c",
+    "cases/aggregate_copy8.c": "7c58610018241b602f087e807c4dac8c7e5cf4f17426f7e9f0e5f557440f7c7f",
+    "cases/aggregate_copy8.rs": "f8a6eadf47f450dad1c14e6b730e54e83f624f222b5774d6a570e508c1149983",
+    "cases/aggregate_out12.c": "68b3739a1de3e3d2f0db9b605e021299fbf73df893ddb45ea622f27d7191fdcb",
+    "cases/aggregate_out12.rs": "2d4c79b4e836025708b8646f34c7fd77cd798577f577adefc270f4c4eec977b8",
+    "cases/aggregate_out3.c": "761f73171d99526abd5339b44dffd8c12184cae0a52731bca4e757cdb14394fa",
+    "cases/aggregate_out3.rs": "97711a92d184dc695640c2f738ce10e68e074bf0ec97f9aea0e301109b6f1f72",
+    "cases/aggregate_out5.c": "9bf2b968124c6f0b90bbe35334eb381e8c31405c5b298e69d990483d23756052",
+    "cases/aggregate_out5.rs": "49d7e1a6fb46c11d2c49301167de78609d3f15c4d1973972759a2a3519b90165",
+    "cases/aggregate_out8.c": "ae479cc12c66bc0627ef6c4e846b35a5872a70f473ed6f267a181abfe8015e0f",
+    "cases/aggregate_out8.rs": "4ceb3bc9fa10a584db645fa4604fbd5c9e602be9bc4f71e153fd83b154ac535c",
+    "cases/aggregate_pair.c": "a681c990d518de29384b5582daab395a60bb1e1cbcb798c05cece0641cf4817f",
+    "cases/aggregate_pair.rs": "ba218f328ca0e4b2a07fc2b591b629775a1fa38961872e09727567b89cf79ffb",
+    "cases/aggregate_return12.c": "ec5661abfb4fa346f08cdd80995718434d984ac4854c2edca1bc2c551385e6e7",
+    "cases/aggregate_return12.rs": "5c3d4095ee7c95c62a4b5a39522a11aa697250b8706403d1fb430b17c8080cc6",
+    "cases/aggregate_return3.c": "01084722c5c1a1bd5da900abc1cbe625bd2c6c1a86830ddabbc00b8756bf30e1",
+    "cases/aggregate_return3.rs": "e906e7be4b7b16a74770410285561c4cea3034f10fe5b43331397f0cdab99f48",
+    "cases/aggregate_return5.c": "0caf6dca36ef3ff862fa3651edbe71aed55a76c6491172440a2a6b58ea16c5b5",
+    "cases/aggregate_return5.rs": "c0ba0a9d2584832f2e99c5f4cf30618f3f9be6c95335796827772f0e64b2df4f",
+    "cases/aggregate_return8.c": "44f29e7102272decd176c79f582e7a2571dcfd03444600493165bc4c365f8c62",
+    "cases/aggregate_return8.rs": "9a0b6c7e3249668a6b062d756578af32483104eab47c9af6d91d4cdba2c95d2c",
+    "cases/checksum.c": "c508f77834a2050145191635c8b716f0cee090031a08d3590e974b1cb419a76a",
+    "cases/checksum.rs": "b46385f0e4cf69d27e2a50067f4a93978a493040db668ae9c3679526993cb221",
+    "cases/concat.c": "6f04b81d4482590bc5b5485765d527af70b5fa0992d631fc21012be819d7bd7c",
+    "cases/concat.rs": "0a437baa41a473a9f0dbef44630f444cef898a8595b9f4c970d067b17502f596",
+    "cases/ctype.c": "03ee3c5b0db0750dd7e15f38feb0e04087d65d8a90f3050daf174816313fc9ba",
+    "cases/ctype.rs": "a29578de6b8c70ca662e98df704f43980f9b0a0537f498a6a325badeed4cb8c7",
+    "cases/dispatch.c": "0db3d4435657028fb344eb1bb65a1ef35ab49d8849fe32dc1069874a2a1828c0",
+    "cases/dispatch.rs": "9cc88af8e64faf8b419adedafeff0ee23771f4fe86e9ce1b4064488ffc1a547d",
+    "cases/format_u16.c": "2b470916c5170e6fc89a20ced01fb4a4d38c0572ca5dbc0bde65fc70b2ccbf4c",
+    "cases/format_u16.rs": "39c4281e08e672c52c12c0616c1c0b6fedd7810e05e51feb498f9aba5ca10c55",
+    "cases/format_u32.c": "d64a74bebbf0ea5b454292f6b5d03133ce5d984e5a332cc9091dabb92c5a539b",
+    "cases/format_u32.rs": "352582f0eedb3fe3a26169b9245d1f9cac8cfbf62cc8bfc7c018062c5a3bb3f9",
+    "cases/format_u64.c": "23619dc218fb4e7b97b2e0bda12f5d4a1da71b66530b16b49707c487304bc3a0",
+    "cases/format_u64.rs": "0960ece6692d02c6b69edda74bc2b6db66d54f1e33592f2db2d8ef24bd1be907",
+    "cases/packing.c": "f4f1a9b276f65326865ec195d095a566ed2467ee6306d0971f1c2564a1faa679",
+    "cases/packing.rs": "351fcdaf2d889167ec62aa03fc0ddc6a2c48ceaae36ee3e95ee821eabc33d9fc",
+    "cases/parse.c": "2bc69f96db8966ba741583c1bf7131dd79f27aeaa35878dac5eba1c4172a217e",
+    "cases/parse.rs": "b74fe583a8b503692d36cd1613d546ec4b27b6d25ff6a6cb4f50562435d93fe2",
+    "cases/search.c": "6b896f5dbbfb5e5a522171cee9600cd68f3af2bd6a163cdd622fc273088065d2",
+    "cases/search.rs": "b7dda84b435e304feeb4e0ea77f23e0cd71db7a5d1a6734004a87e2b3eb08975",
+    "cases/slices.c": "88c383ff55a83fc2061198e428a7c8d492e0275dda2ba5681b5cfb7b25362f90",
+    "cases/slices.rs": "ebadd6f738ad2167e4ef5b2d1f583f38812f7a522dd1de1bd6d9b135cdd5b097",
+    "cases/spans.c": "c2a2eab793f40e8d5e1537c9305254c95ad34534d389605c171812d78d1d747a",
+    "cases/spans.rs": "d8a0536f24c170440d83eec6254b416c45516fd7bc12c2e4d5ba14bd096f2472",
+    "cases/substring.c": "d45a046b9b1fab8f1949b22620db2b9bbbafcd256eda867b7ece82c2659d946b",
+    "cases/substring.rs": "50d397413e08ce4203ddc118cd92267b8b2467d7a2ff74d17aa339870e0279ea"
+  },
+  "commands": [
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/format_u16.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/format_u16-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/format_u16.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/format_u16-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/format_u32.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/format_u32-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/format_u32.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/format_u32-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/format_u64.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/format_u64-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/format_u64.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/format_u64-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/parse.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/parse-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/parse.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/parse-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/ctype.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/ctype-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/ctype.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/ctype-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/spans.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/spans-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/spans.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/spans-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/substring.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/substring-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/substring.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/substring-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/concat.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/concat-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/concat.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/concat-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_copy3.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy3-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy3.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy3-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_return3.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return3-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return3.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return3-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_out3.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out3-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out3.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out3-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_copy5.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy5-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy5.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy5-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_return5.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return5-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return5.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return5-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_out5.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out5-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out5.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out5-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_copy8.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy8-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy8.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy8-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_return8.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return8-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return8.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return8-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_out8.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out8-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out8.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out8-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_copy12.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy12-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy12.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_copy12-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_return12.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return12-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return12.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_return12-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_out12.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out12-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out12.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_out12-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/aggregate_pair.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_pair-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_pair.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/aggregate_pair-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/slices.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/slices-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/slices.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/slices-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/search.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/search-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/search.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/search-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/packing.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/packing-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/packing.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/packing-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/checksum.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/checksum-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/checksum.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/checksum-rust.so"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/home/takashi/Projects/sangoku-tests/cases/dispatch.c",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/dispatch-c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-pattern-check-wjtksc5_/dispatch.rs",
+      "-o",
+      "/tmp/sangoku-pattern-check-wjtksc5_/dispatch-rust.so"
+    ]
+  ]
+}

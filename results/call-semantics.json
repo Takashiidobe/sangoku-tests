@@ -1,0 +1,319 @@
+{
+  "status": "passed",
+  "reference": "Clang-compiled C",
+  "scope": "host result and unchanged input-array equivalence; not SM83 execution or stack-depth measurement",
+  "cases": [
+    {
+      "id": "calls_u8_leaf",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_tail",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_post",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_chain",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_args6",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_indirect",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_live2",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_live2_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_live4",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_live4_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_live8",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_live8_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_local8",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u8_local32",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_leaf",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_tail",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_post",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_chain",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_args6",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_indirect",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_live2",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_live2_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_live4",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_live4_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_live8",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_live8_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_local8",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u16_local32",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_leaf",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_tail",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_post",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_chain",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_args6",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_indirect",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_live2",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_live2_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_live4",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_live4_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_live8",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_live8_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_local8",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u32_local32",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_leaf",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_tail",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_post",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_chain",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_args6",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_indirect",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_live2",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_live2_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_live4",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_live4_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_live8",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_live8_inline",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_local8",
+      "status": "passed",
+      "vectors": 128
+    },
+    {
+      "id": "calls_u64_local32",
+      "status": "passed",
+      "vectors": 128
+    }
+  ],
+  "vectors_per_language": 7168,
+  "source_sha256": {
+    "cases/calls_u16.c": "253aa44c5e86d3dfe3c562c38235cba910fa1925f8d811e2851ed7641dc88cec",
+    "cases/calls_u32.c": "6ce3fccea73fdb5b266f863be89c7a4cc8d297d3e8cb9757bdbcf353fda0597e",
+    "cases/calls_u64.c": "b50135d3369b66977fbe78ff3f78d9fc7519aa9287fed4218ef8b8a647e39805",
+    "cases/calls_u8.c": "4a898de94e654cc64dc18583950adef36ccb34f808669bd502a1fbecd6e5c9ce",
+    "cases/calls_u16.rs": "30be04badd0a0e19fa50819500a2fb9f7d2ee914d6e64d38a187b260ce3c52fc",
+    "cases/calls_u32.rs": "d34f1c4d514b1ceed7ada711a48211c2f77446ea318935a30ebf2a7746f27eb2",
+    "cases/calls_u64.rs": "cdc739c050ef268541e058c5f16eca78226f556418a50691fdf228312d7063cb",
+    "cases/calls_u8.rs": "5f8ae5f48b6dccafe03a9acca0e49e6df9421306108773607562ccb2482ef580"
+  },
+  "commands": [
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-shared",
+      "-fPIC",
+      "/tmp/sangoku-call-check-8w67bu_s/calls.c",
+      "-o",
+      "/tmp/sangoku-call-check-8w67bu_s/c.so"
+    ],
+    [
+      "rustc",
+      "--edition=2024",
+      "--crate-type=cdylib",
+      "-Copt-level=2",
+      "/tmp/sangoku-call-check-8w67bu_s/calls.rs",
+      "-o",
+      "/tmp/sangoku-call-check-8w67bu_s/rust.so"
+    ]
+  ]
+}
