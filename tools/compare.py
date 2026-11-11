@@ -13,8 +13,15 @@ from typing import Any
 
 from analyze import annotate
 from compile_cache import SangokuCache, SdccCache
+from cycle_cases import subcases
+from cycle_runner import DEFAULT_LIBRARY
 from generate import ROOT, generate
 from libraries import SdccLibrary, measure_rust_link, measure_sdcc_link
+from llvm_z80 import LlvmZ80
+from references import annotate_references, reference_summary
+from rust_z80 import NativeRustZ80
+from setup_llvm_z80 import DEFAULT_BIN
+from setup_rust_z80 import DEFAULT_RUSTC
 from stack_metrics import stack_metrics
 
 
@@ -383,7 +390,7 @@ def compare_case(c, rust, sdcc):
     }
 
 
-def summarize(rows):
+def summarize(rows) -> dict[str, Any]:
     counts = Counter(row["comparison"]["status"] for row in rows)
     compared = [r for r in rows if r["comparison"]["status"] == "compared"]
     return {
@@ -403,9 +410,10 @@ def summarize(rows):
             )
         ),
         "compiler_statuses": {
-            name: dict(Counter(r[name]["status"] for r in rows))
-            for name in ["sangoku", "sdcc"]
+            name: dict(Counter(r.get(name, {}).get("status", "not_run") for r in rows))
+            for name in ["sangoku", "sdcc", "llvm_z80"]
         },
+        "best_observed_references": reference_summary(rows),
         "largest_byte_gaps": [
             {
                 "id": r["id"],
@@ -488,6 +496,33 @@ def main():
     )
     parser.add_argument("--sdcc", default="sdcc")
     parser.add_argument(
+        "--cycles",
+        action="store_true",
+        help="Measure declared input subcases in SameBoy, including helpers",
+    )
+    parser.add_argument("--sameboy-library", type=Path, default=DEFAULT_LIBRARY)
+    parser.add_argument("--llvm-z80", type=Path, default=DEFAULT_BIN, metavar="BIN_DIR")
+    parser.add_argument(
+        "--llvm-rustc",
+        type=Path,
+        default=DEFAULT_RUSTC,
+        help="Native Rust-Z80 compiler",
+    )
+    parser.add_argument(
+        "--llvm-frontend",
+        choices=["native", "ir"],
+        default="native",
+        help="Native Rust-Z80, or the experimental scalar IR adapter",
+    )
+    parser.add_argument(
+        "--without-llvm-z80", action="store_true", help="Run only Sangoku and SDCC"
+    )
+    parser.add_argument(
+        "--llvm-rust-toolchain",
+        default="nightly-2026-10-25",
+        help="Rust frontend for the experimental scalar LLVM reference",
+    )
+    parser.add_argument(
         "--kind",
         choices=["integer", "float", "string", "call", "pattern"],
         help="Select a fixture family",
@@ -532,6 +567,18 @@ def main():
     if args.list:
         print("\n".join(c["id"] for c in cases))
         return 0
+    if args.cycles:
+        if args.without_llvm_z80 or args.llvm_frontend != "native":
+            parser.error("--cycles requires the native reference toolchain")
+        if not any(subcases(case) for case in cases):
+            parser.error(
+                "no timing subcases are declared for the selected fixtures; add them in tools/cycle_cases.py"
+            )
+        if not args.sameboy_library.is_file():
+            parser.error(
+                "SameBoy library missing; build SameBoy with make lib and pass --sameboy-library PATH"
+            )
+        args.cycle_case = None
     if args.output is None:
         name = (
             cases[0]["id"]
@@ -566,9 +613,19 @@ def main():
         / "build"
         / ("run-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%f"))
     )
+    try:
+        llvm = None
+        if not args.without_llvm_z80:
+            llvm = (
+                NativeRustZ80(args.llvm_z80, args.llvm_rustc, run, args.timeout)
+                if args.llvm_frontend == "native"
+                else LlvmZ80(args.llvm_z80, args.llvm_rust_toolchain, run, args.timeout)
+            )
+    except (ValueError, OSError) as error:
+        parser.error(str(error))
     sdcc_library = SdccLibrary(args.sdcc, work / "sdcc-library")
-    report = {
-        "schema_version": 2,
+    report: dict[str, Any] = {
+        "schema_version": 3,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "target": "sm83 / LR35902",
         "methodology": {
@@ -582,6 +639,10 @@ def main():
             "instruction_counts": "source mnemonics only; inline db machine code reported separately",
             "scope": "static codegen comparison; no cycle estimates or target runtime equivalence checks",
             "library_cost": "SDCC archive dependency bytes for all supported cases; isolated linked reachable ROM sections for Rust string cases; no startup, entry harness or alignment padding",
+            "llvm_z80": llvm.metadata["method"] + "; machine outlining disabled"
+            if llvm
+            else "disabled",
+            "reference": "best observed SDCC/LLVM-Z80 size per metric; body excludes external helpers, with_dependencies requires complete transitive dependency measurements; not a proof of optimality or speed",
         },
         "tools": {},
         "sources": {},
@@ -600,6 +661,11 @@ def main():
             "version": outcome["stdout"] + outcome["stderr"],
         }
     report["tools"]["sangoku"]["binary_sha256"] = digest(args.sangoku)
+    if llvm:
+        report["tools"]["llvm_z80"] = llvm.metadata
+        report["commands"] += [
+            {"compiler": "llvm_z80", "phase": "setup", **log} for log in llvm.logs
+        ]
     repo = ROOT.parent / "sangoku"
     if (repo / ".git").exists():
         report["tools"]["sangoku"]["checkout_commit"] = run(
@@ -616,7 +682,7 @@ def main():
         rows = []
         for ty, group in groups.items():
             print(f"{mode}: {ty} ({len(group)} cases)", flush=True)
-            results = {}
+            results: dict[str, dict[str, Any]] = {}
             for compiler in ["sangoku", "sdcc"]:
                 results[compiler], logs = compile_group(
                     compiler, group, mode, args, work / mode / ty / compiler
@@ -625,6 +691,22 @@ def main():
                     {"compiler": compiler, "mode": mode, "type": ty, **log}
                     for log in logs
                 ]
+            if llvm:
+                results["llvm_z80"], logs = llvm.compile_group(
+                    group, mode, work / mode / ty / "llvm_z80"
+                )
+                report["commands"] += [
+                    {"compiler": "llvm_z80", "mode": mode, "type": ty, **log}
+                    for log in logs
+                ]
+            else:
+                results["llvm_z80"] = {
+                    c["id"]: {
+                        "status": "not_run",
+                        "diagnostic": "disabled with --without-llvm-z80",
+                    }
+                    for c in group
+                }
             for c in group:
                 r, s = results["sangoku"][c["id"]], results["sdcc"][c["id"]]
                 if s["status"] == "ok":
@@ -686,10 +768,18 @@ def main():
                     )
                     failed |= r["library"]["status"] == "error"
                 failed |= r["status"] == "error" or s["status"] == "error"
+                failed |= results["llvm_z80"][c["id"]]["status"] == "error"
                 rows.append(
-                    {**c, "sangoku": r, "sdcc": s, "comparison": compare_case(c, r, s)}
+                    {
+                        **c,
+                        "sangoku": r,
+                        "sdcc": s,
+                        "llvm_z80": results["llvm_z80"][c["id"]],
+                        "comparison": compare_case(c, r, s),
+                    }
                 )
         annotate(rows)
+        annotate_references(rows)
         report["runs"][mode] = {
             "summary": summarize(rows),
             "patterns": patterns(rows),
@@ -704,9 +794,13 @@ def main():
     )
     if backend.is_file():
         report["tools"]["sangoku"]["backend_sha256"] = digest(backend)
+    if args.cycles:
+        from measure_cycles import add_cycles
+
+        failed |= add_cycles(report, args)
     args.output = args.output.resolve()
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    if args.compile_cache:
+    if args.compile_cache and args.sdcc_cache:
         report["cache"] = {
             "hits": args.compile_cache.hits,
             "misses": args.compile_cache.misses,
