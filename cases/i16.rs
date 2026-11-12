@@ -18,6 +18,18 @@ pub extern "C" fn i16_mul(a : i16, b : i16)
 
 #[unsafe(no_mangle)]
 #[inline(never)]
+pub extern "C" fn i16_mulhi(a: i16, b: i16) -> i16 {
+  ((a as i32).wrapping_mul(b as i32) >> 16) as i16
+}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn i16_mulhi_u16(a: i16, b: u16) -> u16 {
+  ((a as i32).wrapping_mul(b as i32) >> 16) as u16
+}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
 pub unsafe extern "C" fn i16_div(a : i16, b : i16)
     ->i16 {
   unsafe { core::intrinsics::unchecked_div(a, b) }
@@ -127,6 +139,22 @@ pub extern "C" fn i16_div3(a : i16)
 #[inline(never)]
 pub extern "C" fn i16_rem10(a : i16)
     ->i16{a % 10}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn i16_div255(a: i16) -> i16 { a / 255 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn i16_rem255(a: i16) -> i16 { a % 255 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn i16_div257(a: i16) -> i16 { a / 257 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn i16_rem257(a: i16) -> i16 { a % 257 }
 
 #[unsafe(no_mangle)]
 #[inline(never)]

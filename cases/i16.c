@@ -14,6 +14,14 @@ int16_t i16_mul(int16_t a, int16_t b) {
   return (int16_t)((uint32_t)(uint16_t)a * (uint32_t)(uint16_t)b);
 }
 
+int16_t i16_mulhi(int16_t a, int16_t b) {
+  return (int16_t)(((int32_t)a * (int32_t)b) >> 16);
+}
+
+uint16_t i16_mulhi_u16(int16_t a, uint16_t b) {
+  return (uint16_t)(((int32_t)a * (int32_t)b) >> 16);
+}
+
 int16_t i16_div(int16_t a, int16_t b) { return a / b; }
 
 int16_t i16_rem(int16_t a, int16_t b) { return a % b; }
@@ -53,6 +61,14 @@ int16_t i16_mul10(int16_t a) { return (int16_t)((uint32_t)(uint16_t)a * 10); }
 int16_t i16_div3(int16_t a) { return a / 3; }
 
 int16_t i16_rem10(int16_t a) { return a % 10; }
+
+int16_t i16_div255(int16_t a) { return a / 255; }
+
+int16_t i16_rem255(int16_t a) { return a % 255; }
+
+int16_t i16_div257(int16_t a) { return a / 257; }
+
+int16_t i16_rem257(int16_t a) { return a % 257; }
 
 int16_t i16_shl(int16_t a, uint8_t b) {
   return (int16_t)((uint32_t)(uint16_t)a << (b & 15));

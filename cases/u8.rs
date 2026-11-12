@@ -18,6 +18,12 @@ pub extern "C" fn u8_mul(a : u8, b : u8)
 
 #[unsafe(no_mangle)]
 #[inline(never)]
+pub extern "C" fn u8_mulhi(a: u8, b: u8) -> u8 {
+  ((a as u16).wrapping_mul(b as u16) >> 8) as u8
+}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
 pub unsafe extern "C" fn u8_div(a : u8, b : u8)
     ->u8 {
   unsafe { core::intrinsics::unchecked_div(a, b) }

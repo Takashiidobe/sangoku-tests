@@ -18,6 +18,12 @@ pub extern "C" fn u32_mul(a : u32, b : u32)
 
 #[unsafe(no_mangle)]
 #[inline(never)]
+pub extern "C" fn u32_mulhi(a: u32, b: u32) -> u32 {
+  ((a as u64).wrapping_mul(b as u64) >> 32) as u32
+}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
 pub unsafe extern "C" fn u32_div(a : u32, b : u32)
     ->u32 {
   unsafe { core::intrinsics::unchecked_div(a, b) }

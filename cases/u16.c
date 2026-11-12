@@ -13,9 +13,27 @@ uint16_t u16_mul(uint16_t a, uint16_t b) {
   return (uint16_t)((uint32_t)(uint16_t)a * (uint32_t)(uint16_t)b);
 }
 
+uint16_t u16_mulhi(uint16_t a, uint16_t b) {
+  return (uint16_t)(((uint32_t)a * (uint32_t)b) >> 16);
+}
+
+uint16_t u16_mul_u8(uint16_t a, uint16_t b) {
+  return (uint16_t)((uint16_t)(uint8_t)a * b);
+}
+
+uint16_t u16_mul_loop(uint16_t a, uint8_t n) {
+  uint16_t sum = 0;
+  for (uint8_t i = 0; i < n; ++i) sum = (uint16_t)(sum + (uint16_t)(a * i));
+  return sum;
+}
+
 uint16_t u16_div(uint16_t a, uint16_t b) { return a / b; }
 
 uint16_t u16_rem(uint16_t a, uint16_t b) { return a % b; }
+
+uint16_t u16_divrem_xor(uint16_t a, uint16_t b) {
+  return (a / b) ^ (a % b);
+}
 
 uint16_t u16_and(uint16_t a, uint16_t b) { return a & b; }
 
@@ -54,6 +72,22 @@ uint16_t u16_mul10(uint16_t a) {
 uint16_t u16_div3(uint16_t a) { return a / 3; }
 
 uint16_t u16_rem10(uint16_t a) { return a % 10; }
+
+uint16_t u16_div255(uint16_t a) { return a / 255; }
+
+uint16_t u16_rem255(uint16_t a) { return a % 255; }
+
+uint16_t u16_div257(uint16_t a) { return a / 257; }
+
+uint16_t u16_rem257(uint16_t a) { return a % 257; }
+
+uint16_t u16_div1(uint16_t a) { return a / 1; }
+
+uint16_t u16_div2(uint16_t a) { return a / 2; }
+
+uint16_t u16_div256(uint16_t a) { return a / 256; }
+
+uint16_t u16_rem256(uint16_t a) { return a % 256; }
 
 uint16_t u16_shl(uint16_t a, uint8_t b) {
   return (uint16_t)((uint32_t)(uint16_t)a << (b & 15));

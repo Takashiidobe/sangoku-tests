@@ -14,6 +14,10 @@ int32_t i32_mul(int32_t a, int32_t b) {
   return (int32_t)((uint32_t)(uint32_t)a * (uint32_t)(uint32_t)b);
 }
 
+int32_t i32_mulhi(int32_t a, int32_t b) {
+  return (int32_t)(((int64_t)a * (int64_t)b) >> 32);
+}
+
 int32_t i32_div(int32_t a, int32_t b) { return a / b; }
 
 int32_t i32_rem(int32_t a, int32_t b) { return a % b; }

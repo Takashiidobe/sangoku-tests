@@ -14,6 +14,10 @@ int8_t i8_mul(int8_t a, int8_t b) {
   return (int8_t)((uint32_t)(uint8_t)a * (uint32_t)(uint8_t)b);
 }
 
+int8_t i8_mulhi(int8_t a, int8_t b) {
+  return (int8_t)(((int16_t)a * (int16_t)b) >> 8);
+}
+
 int8_t i8_div(int8_t a, int8_t b) { return a / b; }
 
 int8_t i8_rem(int8_t a, int8_t b) { return a % b; }

@@ -34,6 +34,47 @@ def integer_cases(ty):
             f"a.{method}(b)",
             "all bit patterns; result wraps modulo 2^width",
         )
+    if bits in {8, 16, 32}:
+        wide = f"{'uint' if not signed else 'int'}{bits * 2}_t"
+        rust_wide = f"{'u' if not signed else 'i'}{bits * 2}"
+        yield (
+            "mulhi",
+            cty,
+            f"{cty} a, {cty} b",
+            f"a: {ty}, b: {ty}",
+            f"return ({cty})((({wide})a * ({wide})b) >> {bits});",
+            f"(((a as {rust_wide}).wrapping_mul(b as {rust_wide}) >> {bits}) as {ty})",
+            f"high {bits} product bits; signed multiplication uses two's-complement inputs",
+        )
+    if ty == "i16":
+        yield (
+            "mulhi_u16",
+            "uint16_t",
+            "int16_t a, uint16_t b",
+            "a: i16, b: u16",
+            "return (uint16_t)(((int32_t)a * (int32_t)b) >> 16);",
+            "(((a as i32).wrapping_mul(b as i32) >> 16) as u16)",
+            "high 16 product bits; first operand is signed and second is unsigned",
+        )
+    if ty == "u16":
+        yield (
+            "mul_u8",
+            cty,
+            f"{cty} a, {cty} b",
+            f"a: {ty}, b: {ty}",
+            f"return ({cty})((uint16_t)(uint8_t)a * b);",
+            "(a as u8 as u16).wrapping_mul(b)",
+            "low 16 product bits; first operand is known to fit in 8 bits",
+        )
+        yield (
+            "mul_loop",
+            cty,
+            "uint16_t a, uint8_t n",
+            "a: u16, n: u8",
+            "uint16_t sum = 0; for (uint8_t i = 0; i < n; ++i) sum = (uint16_t)(sum + (uint16_t)(a * i)); return sum;",
+            "{ let mut sum = 0u16; for i in 0..n { sum = sum.wrapping_add(a.wrapping_mul(i as u16)); } sum }",
+            "n <= 255; sum wraps modulo 2^16",
+        )
     for op in ["div", "rem"]:
         token = "/" if op == "div" else "%"
         yield (
@@ -54,6 +95,42 @@ def integer_cases(ty):
             f"return a {token} b;",
             f"a {token} b",
             "all bit patterns",
+        )
+    if bits == 16:
+        for op, divisor, token in [
+            ("div255", 255, "/"),
+            ("rem255", 255, "%"),
+            ("div257", 257, "/"),
+            ("rem257", 257, "%"),
+        ]:
+            yield (
+                op,
+                cty,
+                f"{cty} a",
+                f"a: {ty}",
+                f"return a {token} {divisor};",
+                f"a {token} {divisor}",
+                "all bit patterns; divisor is a nonzero compile-time constant",
+            )
+    if ty == "u16":
+        for op, divisor, token in [("div1", 1, "/"), ("div2", 2, "/"), ("div256", 256, "/"), ("rem256", 256, "%")]:
+            yield (
+                op,
+                cty,
+                f"{cty} a",
+                f"a: {ty}",
+                f"return a {token} {divisor};",
+                f"a {token} {divisor}",
+                "all bit patterns; divisor is a nonzero compile-time constant",
+            )
+        yield (
+            "divrem_xor",
+            cty,
+            f"{cty} a, {cty} b",
+            f"a: {ty}, b: {ty}",
+            "return (a / b) ^ (a % b);",
+            "unsafe { core::intrinsics::unchecked_div(a, b) ^ core::intrinsics::unchecked_rem(a, b) }",
+            "b != 0; both quotient and remainder are observable",
         )
     for op, token in [
         ("eq", "=="),

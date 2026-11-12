@@ -18,6 +18,28 @@ pub extern "C" fn u16_mul(a : u16, b : u16)
 
 #[unsafe(no_mangle)]
 #[inline(never)]
+pub extern "C" fn u16_mulhi(a: u16, b: u16) -> u16 {
+  ((a as u32).wrapping_mul(b as u32) >> 16) as u16
+}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_mul_u8(a: u16, b: u16) -> u16 {
+  (a as u8 as u16).wrapping_mul(b)
+}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_mul_loop(a: u16, n: u8) -> u16 {
+  let mut sum = 0u16;
+  for i in 0..n {
+    sum = sum.wrapping_add(a.wrapping_mul(i as u16));
+  }
+  sum
+}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
 pub unsafe extern "C" fn u16_div(a : u16, b : u16)
     ->u16 {
   unsafe { core::intrinsics::unchecked_div(a, b) }
@@ -27,6 +49,12 @@ pub unsafe extern "C" fn u16_div(a : u16, b : u16)
 #[inline(never)]
 pub unsafe extern "C" fn u16_rem(a : u16, b : u16) -> u16 {
   unsafe { core::intrinsics::unchecked_rem(a, b) }
+}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_divrem_xor(a: u16, b: u16) -> u16 {
+  unsafe { core::intrinsics::unchecked_div(a, b) ^ core::intrinsics::unchecked_rem(a, b) }
 }
 
 #[unsafe(no_mangle)]
@@ -127,6 +155,38 @@ pub extern "C" fn u16_div3(a : u16)
 #[inline(never)]
 pub extern "C" fn u16_rem10(a : u16)
     ->u16{a % 10}
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_div255(a: u16) -> u16 { a / 255 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_rem255(a: u16) -> u16 { a % 255 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_div257(a: u16) -> u16 { a / 257 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_rem257(a: u16) -> u16 { a % 257 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_div1(a: u16) -> u16 { a / 1 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_div2(a: u16) -> u16 { a / 2 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_div256(a: u16) -> u16 { a / 256 }
+
+#[unsafe(no_mangle)]
+#[inline(never)]
+pub extern "C" fn u16_rem256(a: u16) -> u16 { a % 256 }
 
 #[unsafe(no_mangle)]
 #[inline(never)]

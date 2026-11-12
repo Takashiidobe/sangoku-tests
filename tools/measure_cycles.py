@@ -21,7 +21,21 @@ from sm83 import read_ihx
 INPUT = 0xC100
 OUTPUT = 0xC180
 DONE = 0xC1A0
-C_TYPES = {"u8": "uint8_t", "u16": "uint16_t", "*const u8": "const uint8_t *"}
+C_TYPES = {
+    "i8": "int8_t",
+    "u8": "uint8_t",
+    "i16": "int16_t",
+    "u16": "uint16_t",
+    "i32": "int32_t",
+    "u32": "uint32_t",
+    "*const u8": "const uint8_t *",
+}
+
+
+def scalar_size(ty):
+    if ty[:1] in {"u", "i"} and ty[1:].isdigit():
+        return int(ty[1:]) // 8
+    return 2
 
 
 def signature(case):
@@ -319,13 +333,11 @@ class CycleBench:
                     }
                 continue
             parameters, result_type = signature(case)
-            size = {"u8": 1, "u16": 2}[result_type]
+            size = scalar_size(result_type)
             for sample, result in zip(samples, results):
                 memory = {**initial, **sample["memory"]}
                 for i, (value, (_, ty)) in enumerate(zip(sample["args"], parameters)):
-                    memory[INPUT + 16 * i] = value.to_bytes(
-                        1 if ty == "u8" else 2, "little"
-                    )
+                    memory[INPUT + 16 * i] = value.to_bytes(scalar_size(ty), "little")
                 try:
                     measured = self.emulator.run(
                         image,
